@@ -1,14 +1,17 @@
 package com.example.technews.Adapters;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.technews.Data.TopNews;
 import com.example.technews.R;
 
@@ -36,6 +39,7 @@ public class HomeFragmentNewsAdapter extends RecyclerView.Adapter<HomeFragmentNe
     public void onBindViewHolder(@NonNull HomeFragmentNewsViewHolder holder, int position) {
         TopNews topNews = topNewsList.get(position);
         holder.mNewsTitle.setText(topNews.getTitle());
+        Glide.with(mCtx).load(topNews.getImageUrl()).placeholder(R.drawable.images1).into(holder.mThumbnail);
     }
 
     @Override
@@ -46,9 +50,11 @@ public class HomeFragmentNewsAdapter extends RecyclerView.Adapter<HomeFragmentNe
     class HomeFragmentNewsViewHolder extends RecyclerView.ViewHolder {
 
         TextView mNewsTitle;
+        ImageView mThumbnail;
         public HomeFragmentNewsViewHolder(@NonNull View itemView) {
             super(itemView);
             mNewsTitle = itemView.findViewById(R.id.news_card_title);
+            mThumbnail = itemView.findViewById(R.id.topNewsThumbnail);
         }
     }
 }
